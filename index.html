@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charmaine day</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffcc80, #ffeb3b, #ff5722);
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+            position: relative; 
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin: auto;
+            max-width: 600px;
+            text-align: center;
+            transition: opacity 0.5s ease;
+            z-index: 1; 
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .surprise {
+            font-size: 1.5em;
+            margin-top: 20px;
+            display: none; 
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+            margin-top: 20px; 
+        }
+        .button:hover {
+            background-color: #e64a19;
+        }
+        .balloons {
+            font-size: 3em;
+            margin-top: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .from-jan {
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #ff5722; 
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .heart {
+            position: absolute;
+            top: -50px;
+            color: red;
+            font-size: 1.5em;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Happy bortdi Charmaine! 🎉</h1>
+        <button class="button" onclick="revealMessage()">Click for Surprise! 🎁</button>
+        <div class="surprise" id="surpriseMessage">
+            <p>Happy Birthday! 🎂 May your day be filled with love, laughter, and amazing memories! 🤗</p>
+            <p>Here's to many more wonderful years of friendship! 🥳❤️</p>
+            <p class="from-jan">From Jan & Chacha 🌟</p>
+            <div class="balloons">🎈🎈🎈</div>
+        </div>
+        <audio id="birthdayAudio" src="happy-birthday.mp3" preload="auto"></audio>
+    </div>
+
+    <script>
+        function revealMessage() {
+            const message = document.getElementById('surpriseMessage');
+            const audio = document.getElementById('birthdayAudio');
+            message.style.display = 'block'; 
+            setTimeout(() => {
+                message.style.opacity = 1; 
+                message.scrollIntoView({ behavior: 'smooth' }); 
+                audio.play(); 
+            }, 10);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️'; 
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            heart.addEventListener('animationend', () => {
+                heart.remove(); 
+            });
+        }
+
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
